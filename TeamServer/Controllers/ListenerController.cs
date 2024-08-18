@@ -1,6 +1,6 @@
 ﻿using APIModels.Requests;
 using Microsoft.AspNetCore.Mvc;
-using TeamServer.Models;
+using TeamServer.Models.Listeners;
 using TeamServer.Services;
 
 namespace TeamServer.Controllers {
@@ -10,9 +10,10 @@ namespace TeamServer.Controllers {
     public class ListenerController : ControllerBase {
 
         private readonly IListenerService _listeners;
+        private readonly IAgentService _agentService;
 
-            _listeners = listeners;        public ListenerController(IListenerService listeners) {
-
+        public ListenerController(IListenerService listeners) {
+            _listeners = listeners;
         }
 
         [HttpGet]
@@ -33,6 +34,7 @@ namespace TeamServer.Controllers {
         [HttpPost]
         public IActionResult StartListener([FromBody] StartHttpListenerRequest request) {
             var listener = new HttpListener(request.Name, request.BindPort);
+            listener.Init(_agentService);
             listener.Start();
             _listeners.AddListener(listener);
             var root = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}{HttpContext.Request.Path}";

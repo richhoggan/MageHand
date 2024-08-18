@@ -1,6 +1,7 @@
-﻿using TeamServer.Models;
+﻿using TeamServer.Models.Listeners;
 
-namespace TeamServer.Services {
+namespace TeamServer.Services
+{
     public interface IListenerService {
         void AddListener(Listener listener);
         IEnumerable<Listener> GetListeners();

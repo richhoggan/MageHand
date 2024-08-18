@@ -14,6 +14,7 @@ namespace TeamServer {
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddSingleton<IListenerService, ListenerService>();
+            builder.Services.AddSingleton<IAgentService, AgentService>();
 
             var app = builder.Build();
 
