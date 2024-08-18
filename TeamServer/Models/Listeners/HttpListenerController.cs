@@ -38,5 +38,7 @@ namespace TeamServer.Models.Listeners
             return JsonConvert.DeserializeObject<AgentMetadata>(json);
         }
 
+        
+
     }
 }
