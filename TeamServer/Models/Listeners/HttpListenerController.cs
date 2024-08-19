@@ -3,12 +3,10 @@ using Newtonsoft.Json;
 using System.Text;
 using TeamServer.Services;
 
-namespace TeamServer.Models.Listeners
-{
+namespace TeamServer.Models.Listeners {
 
     [Controller]
-    public class HttpListenerController : ControllerBase
-    {
+    public class HttpListenerController : ControllerBase {
         private readonly IAgentService _agents;
 
         public HttpListenerController(IAgentService agents) {
@@ -26,6 +24,9 @@ namespace TeamServer.Models.Listeners
                 agent = new Agent(metadata);
                 _agents.AddAgent(agent);
             }
+            agent.CheckIn();
+            var tasks = agent.GetPendingTasks();
+            return Ok(tasks);
         }
 
         private AgentMetadata ExtractMetadata(IHeaderDictionary headers) {

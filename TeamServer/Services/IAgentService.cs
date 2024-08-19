@@ -19,7 +19,7 @@ namespace TeamServer.Services {
         }
 
         public Agent GetAgent(string id) {
-            return GetAgents().FirstOrDefault(agent => agent.Id.Equals(id));
+            return GetAgents().FirstOrDefault(agent => agent.Metadata.Id.Equals(id));
         }
 
         public IEnumerable<Agent> GetAgents() {
